@@ -1,1 +1,120 @@
+:root {
+  --navy-bg: #1B2735;    /* Deep Royal Navy */
+  --card-bg: #253347;    /* Slate Navy */
+  --silver: #C0C0C0;     /* Primary Silver */
+  --silver-bright: #E8E8E8;
+  --text-main: #ffffff;
+  --text-muted: #94a3b8;
+}
+
+body {
+  margin: 0;
+  background-color: var(--navy-bg);
+  color: var(--text-main);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  padding-bottom: 40px;
+}
+
+.app-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+}
+
+.title-main {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--silver);
+  text-transform: uppercase;
+}
+
+.title-sub {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-top: 5px;
+}
+
+.card {
+  background-color: var(--card-bg);
+  border: 1px solid rgba(192, 192, 192, 0.1);
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.card-title {
+  color: var(--silver);
+  font-weight: 700;
+  font-size: 1.1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding-bottom: 0.5rem;
+}
+
+.lift-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.lift-row input[type="checkbox"] {
+  width: 22px;
+  height: 22px;
+  accent-color: var(--silver);
+}
+
+.lift-row span {
+  flex: 1;
+  font-size: 0.95rem;
+}
+
+.lift-row.completed span {
+  text-decoration: line-through;
+  color: var(--text-muted);
+  opacity: 0.5;
+}
+
+.weight-input, .reps-input {
+  background: rgba(0,0,0,0.2);
+  border: 1px solid rgba(192, 192, 192, 0.2);
+  color: var(--silver-bright);
+  border-radius: 4px;
+  padding: 4px;
+  text-align: center;
+  width: 55px;
+}
+
+.phase-tabs .nav-link {
+  flex: 1;
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.05);
+  margin: 0 4px;
+  border-radius: 8px;
+  font-weight: 600;
+  border: 1px solid rgba(192, 192, 192, 0.1);
+}
+
+.phase-tabs .nav-link.active {
+  background-color: var(--silver);
+  color: var(--navy-bg);
+}
+
+.btn-silver {
+  background-color: var(--silver);
+  color: var(--navy-bg);
+  font-weight: 700;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+footer {
+  text-align: center;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-top: 2rem;
+}
 
