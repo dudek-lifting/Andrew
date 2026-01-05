@@ -34,6 +34,7 @@ const programBlocks = {
 let currentUser = "Andrew";
 const phaseTabs = document.getElementById("phaseTabs");
 const phaseContent = document.getElementById("phaseContent");
+const exportBtn = document.getElementById("exportBtn");
 
 function getKey(block, day, lift) {
   return `${currentUser}-b${block}-d${day}-${lift}`;
@@ -119,8 +120,32 @@ function renderBlock(blockId) {
   });
 }
 
+/* ============================
+   EXPORT DATA TO EMAIL (CSV)
+============================ */
+exportBtn.addEventListener("click", () => {
+  let csvContent = `Blueprint Progress: ${currentUser}\n`;
+  csvContent += "Phase,Workout,Exercise,Weight (lbs),Reps,Status\n";
+
+  Object.entries(programBlocks).forEach(([blockId, blockData]) => {
+    Object.entries(blockData.days).forEach(([dayNum, day]) => {
+      day.lifts.forEach(lift => {
+        const weight = localStorage.getItem(getKey(blockId, dayNum, lift + '-weight')) || "0";
+        const reps = localStorage.getItem(getKey(blockId, dayNum, lift + '-reps')) || "0";
+        const status = localStorage.getItem(getKey(blockId, dayNum, lift)) === "done" ? "Completed" : "Incomplete";
+        csvContent += `"${blockData.label}","Workout ${dayNum}","${lift}","${weight}","${reps}","${status}"\n`;
+      });
+      
+      const walkStatus = localStorage.getItem(getKey(blockId, dayNum, "InclineWalk")) === "done" ? "Completed" : "Incomplete";
+      csvContent += `"${blockData.label}","Workout ${dayNum}","Incline Treadmill Walk","N/A","N/A","${walkStatus}"\n`;
+    });
+  });
+
+  const subject = encodeURIComponent(`${currentUser}'s Progress - The Andrew Dudek Blueprint`);
+  const body = encodeURIComponent(`Attached is my current workout progress data from the Blueprint.\n\n--- DATA BELOW ---\n\n${csvContent}`);
+  window.location.href = `mailto:?subject=${subject}&body=${body}`;
+});
+
 document.getElementById("resetBtn").onclick = () => { if(confirm("Reset all blueprint data?")) { localStorage.clear(); location.reload(); }};
 
 renderTabs();
-
-
