@@ -124,6 +124,7 @@ function renderBlock(blockId) {
    EXPORT DATA (DOWNLOAD .CSV)
 ============================ */
 exportBtn.addEventListener("click", () => {
+  // 1. Generate the CSV Data
   let csvContent = "Phase,Workout,Exercise,Weight (lbs),Reps,Status\n";
 
   Object.entries(programBlocks).forEach(([blockId, blockData]) => {
@@ -140,7 +141,7 @@ exportBtn.addEventListener("click", () => {
     });
   });
 
-  // 1. Create a Blob and Download the file
+  // 2. Create and Trigger Download
   const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
   const link = document.createElement("a");
   const url = URL.createObjectURL(blob);
@@ -153,14 +154,25 @@ exportBtn.addEventListener("click", () => {
   link.click();
   document.body.removeChild(link);
 
-  // 2. Open Email App after a tiny delay so the download triggers first
+  // 3. User Feedback & Delayed Email Open
+  const originalText = exportBtn.innerText;
+  exportBtn.innerText = "💾 File Downloaded!";
+  
+  alert("File downloading! In a few seconds, your email app will open. Just attach the file named 'Andrew_Blueprint_Progress...' from your downloads.");
+
   setTimeout(() => {
     const subject = encodeURIComponent(`Progress Report: The Andrew Dudek Blueprint`);
-    const body = encodeURIComponent(`Hey BallZach! I've attached my latest .csv progress file to this email.\n\n(Note: Andrew, please attach the file that just downloaded to your device!)`);
+    const body = encodeURIComponent(`Hey BallZach! My latest progress file is downloaded. Attaching it now!`);
     window.location.href = `mailto:?subject=${subject}&body=${body}`;
-  }, 500);
+    
+    // Reset button after email opens
+    setTimeout(() => {
+        exportBtn.innerText = originalText;
+    }, 2000);
+  }, 3500); // 3.5 second delay for mobile download focus
 });
 
 document.getElementById("resetBtn").onclick = () => { if(confirm("Reset all blueprint data?")) { localStorage.clear(); location.reload(); }};
 
 renderTabs();
+
