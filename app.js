@@ -121,11 +121,10 @@ function renderBlock(blockId) {
 }
 
 /* ============================
-   EXPORT DATA TO EMAIL (CSV)
+   EXPORT DATA (DOWNLOAD .CSV)
 ============================ */
 exportBtn.addEventListener("click", () => {
-  let csvContent = `Blueprint Progress: ${currentUser}\n`;
-  csvContent += "Phase,Workout,Exercise,Weight (lbs),Reps,Status\n";
+  let csvContent = "Phase,Workout,Exercise,Weight (lbs),Reps,Status\n";
 
   Object.entries(programBlocks).forEach(([blockId, blockData]) => {
     Object.entries(blockData.days).forEach(([dayNum, day]) => {
@@ -141,9 +140,25 @@ exportBtn.addEventListener("click", () => {
     });
   });
 
-  const subject = encodeURIComponent(`${currentUser}'s Progress - The Andrew Dudek Blueprint`);
-  const body = encodeURIComponent(`Attached is my current workout progress data from the Blueprint.\n\n--- DATA BELOW ---\n\n${csvContent}`);
-  window.location.href = `mailto:?subject=${subject}&body=${body}`;
+  // 1. Create a Blob and Download the file
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  const link = document.createElement("a");
+  const url = URL.createObjectURL(blob);
+  const fileName = `Andrew_Blueprint_Progress_${new Date().toISOString().slice(0,10)}.csv`;
+  
+  link.setAttribute("href", url);
+  link.setAttribute("download", fileName);
+  link.style.visibility = 'hidden';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
+  // 2. Open Email App after a tiny delay so the download triggers first
+  setTimeout(() => {
+    const subject = encodeURIComponent(`Progress Report: The Andrew Dudek Blueprint`);
+    const body = encodeURIComponent(`Hey BallZach! I've attached my latest .csv progress file to this email.\n\n(Note: Andrew, please attach the file that just downloaded to your device!)`);
+    window.location.href = `mailto:?subject=${subject}&body=${body}`;
+  }, 500);
 });
 
 document.getElementById("resetBtn").onclick = () => { if(confirm("Reset all blueprint data?")) { localStorage.clear(); location.reload(); }};
