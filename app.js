@@ -2,21 +2,30 @@
    PROGRAM DATA & COACH TIPS
 ============================ */
 const programBlocks = {
-  1: { label: "Foundation", days: { 
-    1: { title: "Push & Quads (Seated)", lifts: ["Seated Chest Press","Seated Leg Press","Machine Overhead Press","Leg Extension Machine","Cable Tricep Pushdowns"], tip: "Hey Andrew, on the Leg Press, place your feet higher on the platform. Being 6'5\", this will take the pressure off your knees and put it on your glutes/quads." }, 
-    2: { title: "Pull & Hamstrings", lifts: ["Lat Pulldown (Wide)","Seated Cable Row","Seated Leg Curl","DB Bicep Curls","Cable Face Pulls"], tip: "For the Lat Pulldowns, focus on pulling your elbows to your ribs, not pulling the bar with your hands. It’ll help grow that back width." }, 
-    3: { title: "Stability & Full Body", lifts: ["Smith Machine Squats","Pec Deck Machine","Machine Assisted Row","DB Lateral Raises","Seated Calf Raises"], tip: "On the Smith Machine, walk your feet about 6 inches forward before you squat. It helps keep your back vertical so your frame stays supported." } 
-  }},
-  2: { label: "Consistency", days: { 
-    1: { title: "Push & Quads", lifts: ["Seated Chest Press","Seated Leg Press","Machine Overhead Press","Leg Extension Machine","Cable Tricep Pushdowns"], tip: "You're getting stronger. Try to increase the weight by just 5lbs on the Chest Press this week. Small wins add up." }, 
-    2: { title: "Pull & Hamstrings", lifts: ["Lat Pulldown (Wide)","Seated Cable Row","Seated Leg Curl","DB Bicep Curls","Cable Face Pulls"], tip: "Keep your chest tall on those Seated Rows. Don't let the weight pull your shoulders forward—stay in control." }, 
-    3: { title: "Stability & Full Body", lifts: ["Smith Machine Squats","Pec Deck Machine","Machine Assisted Row","DB Lateral Raises","Seated Calf Raises"], tip: "Slow down the reps today. 3 seconds down, 1 second up. Control the weight, don't let it control you." } 
-  }},
-  3: { label: "Growth", days: { 
-    1: { title: "Push & Quads", lifts: ["Seated Chest Press","Seated Leg Press","Machine Overhead Press","Leg Extension Machine","Cable Tricep Pushdowns"], tip: "Foundation is built. Now we're just refining. Keep that intensity high on the incline walk!" }, 
-    2: { title: "Pull & Hamstrings", lifts: ["Lat Pulldown (Wide)","Seated Cable Row","Seated Leg Curl","DB Bicep Curls","Cable Face Pulls"], tip: "Focus on the squeeze at the back of the row. You've got this, big bro." }, 
-    3: { title: "Stability & Full Body", lifts: ["Smith Machine Squats","Pec Deck Machine","Machine Assisted Row","DB Lateral Raises","Seated Calf Raises"], tip: "Last workout of the block. Finish strong and then let's talk about the next steps for your health." } 
-  }}
+  1: { 
+    label: "Foundation", 
+    days: { 
+      1: { title: "Push & Quads", lifts: ["Seated Chest Press","Seated Leg Press","Machine Overhead Press","Leg Extension Machine","Tricep Rope Pushdowns"], tip: "Hey Andrew, focus on seat height. Your hands should be level with your mid-chest on that press. Keep your back glued to the pad." }, 
+      2: { title: "Pull & Hamstrings", lifts: ["Lat Pulldown (Wide)","Seated Cable Row","Seated Leg Curl","DB Bicep Curls","Cable Face Pulls"], tip: "On the Lat Pulldown, don't lean back too far. Stay tall and pull the bar to your upper chest. Think about pulling with your elbows." }, 
+      3: { title: "Full Body Stability", lifts: ["Smith Machine Squat","Pec Deck Machine","Machine Row (Chest Supported)","DB Lateral Raise","Seated Calf Raise"], tip: "On the Smith Squat, keep your feet out in front of you so your knees don't go past your toes. This protects your joints at 6'5\"." } 
+    } 
+  },
+  2: { 
+    label: "Consistency", 
+    days: { 
+      1: { title: "Push & Quads", lifts: ["Machine Incline Press","Seated Leg Press","DB Shoulder Press (Seated)","Leg Extension Machine","Tricep Straight Bar Pushdowns"], tip: "The incline press hits the upper chest. At your height, a big upper chest helps fill out your frame. Control the weight on the way down." }, 
+      2: { title: "Pull & Hamstrings", lifts: ["Machine Lat Pulldown (Neutral)","Seated Cable Row","Standing Leg Curl","Hammer Curls","Cable Face Pulls"], tip: "The Neutral Grip (palms facing each other) is easier on the shoulders. Squeeze your shoulder blades together at the bottom." }, 
+      3: { title: "Full Body Stability", lifts: ["Smith Machine Squat","Pec Deck (Slow Tempo)","One-Arm Machine Row","DB Lateral Raise","Standing Calf Raise"], tip: "One-arm rows help even out any strength differences. Focus on a deep stretch in the lat before pulling back." } 
+    } 
+  },
+  3: { 
+    label: "Growth", 
+    days: { 
+      1: { title: "Push & Quads", lifts: ["Seated Chest Press","Smith Machine Split Squat","Machine Overhead Press","Leg Extension Machine","Tricep Overhead Extension (Cable)"], tip: "The split squat is tough but great for balance. Keep your front shin vertical and use the Smith Machine for stability." }, 
+      2: { title: "Pull & Hamstrings", lifts: ["Lat Pulldown (Close Grip)","Seated Row (Wide Grip)","Seated Leg Curl","DB Incline Curls","Cable Face Pulls"], tip: "Incline curls stretch the bicep more—keep your elbows pinned to your sides and don't swing the weights." }, 
+      3: { title: "Full Body Stability", lifts: ["Leg Press (Narrow Stance)","Pec Deck Machine","Lat Pulldown (Underhand)","DB Lateral Raise","Seated Calf Raise"], tip: "Underhand pulldowns use more biceps. Grip it like you're doing a chin-up and keep your chest facing the ceiling." } 
+    } 
+  }
 };
 
 /* ============================
@@ -86,7 +95,7 @@ function renderBlock(blockId) {
           <span style="color:var(--silver); font-weight:bold;">Incline Treadmill Walk (20 min)</span>
       </div>
       <div class="coach-tip-box mt-3">
-        <strong>Brotherly Advice:</strong><br>
+        <strong>Brotherly Advice:</strong>
         <small>${day.tip}</small>
       </div>
     `;
@@ -113,4 +122,5 @@ function renderBlock(blockId) {
 document.getElementById("resetBtn").onclick = () => { if(confirm("Reset all blueprint data?")) { localStorage.clear(); location.reload(); }};
 
 renderTabs();
+
 
