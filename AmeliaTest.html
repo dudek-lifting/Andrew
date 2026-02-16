@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Amelia Dudek - Indiana Learner's Permit Practice Exam</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f6f8;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .container {
+        background: white;
+        width: 90%;
+        max-width: 700px;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+        text-align: center;
+        font-size: 22px;
+    }
+    .question {
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+    .answers button {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+        cursor: pointer;
+        font-size: 14px;
+    }
+    .answers button:hover {
+        background-color: #e6e6e6;
+    }
+    .feedback {
+        margin-top: 15px;
+        font-size: 14px;
+    }
+    .progress {
+        margin-bottom: 15px;
+        font-size: 14px;
+        text-align: right;
+        color: #555;
+    }
+    .correct {
+        color: green;
+    }
+    .incorrect {
+        color: red;
+    }
+    .complete {
+        text-align: center;
+        font-size: 18px;
+        color: green;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Indiana Permit Practice Exam<br>Custom for Amelia Dudek</h1>
+    <div class="progress" id="progress"></div>
+    <div class="question" id="question"></div>
+    <div class="answers" id="answers"></div>
+    <div class="feedback" id="feedback"></div>
+</div>
+
+<script>
+const questions = [
+{
+q: "1. What does a diamond-shaped road sign indicate?",
+a: ["Stop", "Warning", "Yield", "Railroad Crossing"],
+correct: 1,
+explanation: "Diamond-shaped signs are warning signs. They alert drivers to upcoming hazards or changes in road conditions."
+},
+{
+q: "2. When approaching a stopped school bus with flashing red lights, you must:",
+a: ["Slow and pass carefully", "Stop regardless of direction (unless on a divided highway)", "Honk before passing", "Continue if no children visible"],
+correct: 1,
+explanation: "Indiana law requires you to stop for a school bus with flashing red lights unless separated by a physical median."
+},
+{
+q: "3. You must signal at least how many feet before turning on city streets?",
+a: ["50 feet", "100 feet", "200 feet", "500 feet"],
+correct: 2,
+explanation: "Drivers must signal at least 200 feet before turning in Indiana."
+},
+{
+q: "4. A steady red traffic light means:",
+a: ["Stop and remain stopped until green", "Stop then proceed when clear", "Yield", "Slow and proceed"],
+correct: 0,
+explanation: "A steady red light means come to a complete stop and wait for green."
+},
+{
+q: "5. If your vehicle begins to skid, you should:",
+a: ["Brake hard", "Turn steering wheel in direction of skid", "Accelerate", "Shift to neutral immediately"],
+correct: 1,
+explanation: "Steer in the direction you want the front of the car to go—into the skid."
+},
+{
+q: "6. The legal blood alcohol concentration (BAC) limit for drivers under 21 in Indiana is:",
+a: ["0.08%", "0.05%", "0.02%", "0.00%"],
+correct: 2,
+explanation: "Indiana has a 0.02% BAC limit for drivers under 21."
+},
+{
+q: "7. When two vehicles arrive at a four-way stop at the same time, who goes first?",
+a: ["Driver on the left", "Driver on the right", "Largest vehicle", "Fastest vehicle"],
+correct: 1,
+explanation: "The driver on the right has the right-of-way."
+},
+{
+q: "8. A solid yellow line on your side of the center line means:",
+a: ["Passing allowed anytime", "No passing", "Passing allowed with caution", "Road closed ahead"],
+correct: 1,
+explanation: "A solid yellow line indicates no passing."
+},
+{
+q: "9. When driving in fog, you should use:",
+a: ["High beams", "Low beams", "Hazard lights only", "Parking lights only"],
+correct: 1,
+explanation: "Use low beams in fog to reduce glare."
+},
+{
+q: "10. Minimum following distance under normal conditions should be:",
+a: ["1 second", "2 seconds", "3 seconds", "5 seconds"],
+correct: 2,
+explanation: "Use the 3-second rule in normal conditions."
+}
+];
+
+let current = 0;
+
+function loadQuestion() {
+    if (current >= questions.length) {
+        document.querySelector(".container").innerHTML = "<div class='complete'>Congratulations Amelia! 🎉<br>You completed your Indiana Practice Test!</div>";
+        return;
+    }
+
+    document.getElementById("progress").innerText = 
+        "Question " + (current + 1) + " of " + questions.length;
+
+    document.getElementById("question").innerText = questions[current].q;
+    document.getElementById("feedback").innerText = "";
+
+    const answersDiv = document.getElementById("answers");
+    answersDiv.innerHTML = "";
+
+    questions[current].a.forEach((answer, index) => {
+        const btn = document.createElement("button");
+        btn.innerText = answer;
+        btn.onclick = () => checkAnswer(index);
+        answersDiv.appendChild(btn);
+    });
+}
+
+function checkAnswer(index) {
+    const feedback = document.getElementById("feedback");
+    if (index === questions[current].correct) {
+        feedback.innerHTML = "<span class='correct'>Correct! ✔<br>" + 
+            questions[current].explanation + "</span>";
+        setTimeout(() => {
+            current++;
+            loadQuestion();
+        }, 2000);
+    } else {
+        feedback.innerHTML = "<span class='incorrect'>Incorrect. Try again.</span>";
+    }
+}
+
+loadQuestion();
+</script>
+
+</body>
+</html>
