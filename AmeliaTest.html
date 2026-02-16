@@ -17,7 +17,7 @@
     .container {
         background: white;
         width: 90%;
-        max-width: 750px;
+        max-width: 800px;
         padding: 30px;
         border-radius: 8px;
         box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -83,39 +83,69 @@
 </div>
 
 <script>
-const questions = [
-{
-q: "1. What does a diamond-shaped road sign indicate?",
-a: ["Stop", "Warning", "Yield", "Railroad Crossing"],
-correct: 1,
-explanation: "Diamond-shaped signs are warning signs. They alert drivers to upcoming hazards."
-},
-{
-q: "2. When approaching a stopped school bus with flashing red lights, you must:",
-a: ["Slow and pass carefully", "Stop regardless of direction (unless divided highway)", "Honk before passing", "Continue if no children visible"],
-correct: 1,
-explanation: "Indiana law requires you to stop for a school bus with flashing red lights unless separated by a physical median."
-},
-{
-q: "3. You must signal at least how many feet before turning?",
-a: ["50 feet", "100 feet", "200 feet", "500 feet"],
-correct: 2,
-explanation: "Drivers must signal at least 200 feet before turning."
-},
-{
-q: "4. A steady red traffic light means:",
-a: ["Stop and remain stopped", "Stop then proceed when clear", "Yield", "Slow and proceed"],
-correct: 0,
-explanation: "A steady red light means come to a complete stop and wait."
-},
-{
-q: "5. If your vehicle begins to skid, you should:",
-a: ["Brake hard", "Turn into the skid", "Accelerate", "Shift to neutral"],
-correct: 1,
-explanation: "Steer in the direction of the skid to regain control."
-}
+// =====================
+// FULL QUESTION BANK (50)
+// Based on Indiana Driver’s Manual topics
+// =====================
+const questionBank = [
+{q:"What does a diamond-shaped sign indicate?",a:["Stop","Warning","Yield","Railroad crossing"],correct:1,ex:"Diamond-shaped signs warn drivers of upcoming hazards."},
+{q:"An octagon-shaped sign means:",a:["Yield","No passing","Stop","Slow down"],correct:2,ex:"An octagon shape always means STOP."},
+{q:"A triangular red and white sign means:",a:["Stop","Yield","Do not enter","Railroad crossing"],correct:1,ex:"A red and white triangle indicates YIELD."},
+{q:"When must headlights be turned on?",a:["Sunset to sunrise","Only in rain","Only at night","When visibility under 1000 ft"],correct:0,ex:"Headlights must be used from sunset to sunrise."},
+{q:"Minimum following distance rule under normal conditions:",a:["1 second","2 seconds","3 seconds","5 seconds"],correct:2,ex:"Use the 3-second following rule."},
+{q:"You must signal at least how many feet before turning?",a:["50","100","200","500"],correct:2,ex:"Signal at least 200 feet before turning."},
+{q:"BAC limit for drivers under 21:",a:["0.08%","0.05%","0.02%","0.00%"],correct:2,ex:"Indiana under-21 limit is 0.02%."},
+{q:"If two cars arrive at a 4-way stop simultaneously:",a:["Left goes first","Right goes first","Fastest goes first","Largest vehicle goes first"],correct:1,ex:"Driver on the right has right-of-way."},
+{q:"Solid yellow line on your side means:",a:["Passing allowed","No passing","Road closed","Bus lane"],correct:1,ex:"Solid yellow = no passing."},
+{q:"In fog, use:",a:["High beams","Low beams","Hazards only","Parking lights"],correct:1,ex:"Low beams reduce glare."},
+{q:"What does a flashing red light mean?",a:["Yield","Stop completely","Slow down","Proceed with caution"],correct:1,ex:"Flashing red means stop."},
+{q:"Flashing yellow light means:",a:["Stop","Yield","Proceed with caution","Traffic signal ahead"],correct:2,ex:"Flashing yellow = caution."},
+{q:"Speed limit in a school zone when children present:",a:["15 mph","20 mph","25 mph","30 mph"],correct:2,ex:"School zones are typically 25 mph unless posted otherwise."},
+{q:"When approaching a stopped school bus with red lights:",a:["Pass carefully","Stop","Honk then pass","Slow only"],correct:1,ex:"You must stop unless divided highway."},
+{q:"White rectangular signs indicate:",a:["Warning","Regulatory","Guide","Construction"],correct:1,ex:"White signs are regulatory signs."},
+{q:"Orange signs indicate:",a:["School zone","Construction","Hospital","Railroad"],correct:1,ex:"Orange signs warn of construction."},
+{q:"If traffic lights are out at intersection:",a:["Proceed normally","Treat as 4-way stop","Yield only","Honk and go"],correct:1,ex:"Treat as a 4-way stop."},
+{q:"When passing a bicyclist, allow at least:",a:["1 foot","2 feet","3 feet","5 feet"],correct:2,ex:"Indiana requires at least 3 feet."},
+{q:"Handicap parking requires:",a:["Doctor note","Permit/plate","Hazard lights","Short parking time"],correct:1,ex:"Valid handicap placard or plate required."},
+{q:"If your vehicle skids:",a:["Brake hard","Turn into skid","Accelerate","Shift park"],correct:1,ex:"Steer into skid."},
+{q:"Green arrow means:",a:["Stop","Protected turn","Yield","No turn"],correct:1,ex:"Green arrow = protected turn."},
+{q:"Red curb indicates:",a:["Passenger loading","No stopping","Fire lane","Bus stop"],correct:1,ex:"Red curb means no stopping."},
+{q:"What does a pentagon-shaped sign indicate?",a:["Stop","School zone","Yield","No passing"],correct:1,ex:"Pentagon signs warn of school zones."},
+{q:"Broken white line means:",a:["No lane change","Lane change allowed","Road closed","Yield"],correct:1,ex:"Broken white lines allow lane changes."},
+{q:"Move over law requires:",a:["Stop for police","Slow only","Move over or slow for emergency vehicles","Ignore if opposite lane"],correct:2,ex:"Move over or slow down for emergency vehicles."},
+{q:"If an emergency vehicle approaches with siren:",a:["Speed up","Stop immediately in lane","Pull right and stop","Ignore"],correct:2,ex:"Pull to right and stop."},
+{q:"Hydroplaning is caused by:",a:["Ice","Standing water","Fog","Oil only"],correct:1,ex:"Hydroplaning occurs on wet roads."},
+{q:"Yellow center line separates:",a:["Traffic same direction","Opposing traffic","Bike lane","Shoulder"],correct:1,ex:"Yellow divides opposing traffic."},
+{q:"When parking uphill with curb:",a:["Turn wheels away","Turn wheels toward curb","Keep straight","Hazards only"],correct:0,ex:"Turn wheels away from curb uphill."},
+{q:"When parking downhill with curb:",a:["Turn wheels away","Turn wheels toward curb","Keep straight","Neutral gear"],correct:1,ex:"Turn wheels toward curb downhill."},
+{q:"Seat belts are required for:",a:["Driver only","Front seat only","All occupants","Under 18 only"],correct:2,ex:"All occupants must wear seat belts."},
+{q:"Double solid yellow lines mean:",a:["Passing allowed","Passing both ways","No passing either direction","Bus only"],correct:2,ex:"Double solid yellow = no passing either direction."},
+{q:"White stop line indicates:",a:["Pedestrian area","Where to stop","Bike crossing","Yield area"],correct:1,ex:"Stop at white line."},
+{q:"Construction zone fines are:",a:["Reduced","Same","Increased","Optional"],correct:2,ex:"Fines increase in construction zones."},
+{q:"Right turn on red is allowed:",a:["Never","Always","After full stop unless posted otherwise","Only rural"],correct:2,ex:"Right on red allowed after stop unless prohibited."},
+{q:"A steady yellow light means:",a:["Stop immediately","Speed up","Prepare to stop","Yield"],correct:2,ex:"Yellow warns light changing to red."},
+{q:"When merging onto highway:",a:["Stop","Match speed of traffic","Drive slow","Honk"],correct:1,ex:"Match highway speed to merge safely."},
+{q:"Following large trucks requires:",a:["Closer distance","More distance","Same distance","No rule"],correct:1,ex:"Increase following distance."},
+{q:"If a tire blows out:",a:["Brake hard","Grip wheel and slow gradually","Accelerate","Turn sharply"],correct:1,ex:"Hold wheel steady and slow gradually."},
+{q:"What color are warning signs usually?",a:["Red","Yellow","Green","Blue"],correct:1,ex:"Warning signs are usually yellow."},
+{q:"Pedestrians in crosswalk:",a:["Must yield to cars","Have right-of-way","Must run","Wait for signal always"],correct:1,ex:"Drivers must yield to pedestrians."},
+{q:"Railroad crossing with flashing lights means:",a:["Slow","Stop","Yield","Proceed"],correct:1,ex:"Flashing red at railroad = stop."},
+{q:"If convicted of OWI under 21:",a:["Warning only","License suspension","Fine only","Nothing"],correct:1,ex:"Underage OWI results in suspension."},
+{q:"Roundabout traffic flows:",a:["Clockwise","Counterclockwise","Either","Random"],correct:1,ex:"Traffic flows counterclockwise."},
+{q:"Use turn signals when:",a:["Turning only","Changing lanes and turning","Highway only","Optional"],correct:1,ex:"Use signals for lane changes and turns."},
+{q:"Headlights required in rain when:",a:["Always","Wipers in use","Heavy rain only","Night only"],correct:1,ex:"Use headlights when windshield wipers are in use."},
+{q:"Tailgating is dangerous because:",a:["Improves speed","Reduces reaction time","Saves gas","None"],correct:1,ex:"Tailgating reduces reaction time."},
+{q:"What shape is a railroad crossing warning sign?",a:["Round","Square","Triangle","Octagon"],correct:0,ex:"Railroad crossing advance warning signs are round."},
+{q:"At uncontrolled intersection:",a:["Speed up","Yield to vehicle on right","Ignore","Left goes first"],correct:1,ex:"Yield to vehicle on right."}
 ];
 
+// Shuffle and pick 20
+function getRandomQuestions(bank, count) {
+    const shuffled = [...bank].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, count);
+}
+
+let questions = getRandomQuestions(questionBank, 20);
 let current = 0;
 let firstAttempts = [];
 let correctFirstTry = 0;
@@ -126,10 +156,9 @@ function loadQuestion() {
         showResults();
         return;
     }
-
     attempted = false;
     document.getElementById("progress").innerText =
-        "Question " + (current + 1) + " of " + questions.length;
+        "Question " + (current + 1) + " of 20";
 
     document.getElementById("question").innerText = questions[current].q;
     document.getElementById("feedback").innerText = "";
@@ -157,11 +186,11 @@ function checkAnswer(index) {
 
     if (index === questions[current].correct) {
         feedback.innerHTML = "<span class='correct'>Correct! ✔<br>" +
-            questions[current].explanation + "</span>";
+            questions[current].ex + "</span>";
         setTimeout(() => {
             current++;
             loadQuestion();
-        }, 2000);
+        }, 1500);
     } else {
         feedback.innerHTML = "<span class='incorrect'>Incorrect. Try again.</span>";
     }
@@ -169,13 +198,13 @@ function checkAnswer(index) {
 
 function showResults() {
     const container = document.querySelector(".container");
-    const percentage = Math.round((correctFirstTry / questions.length) * 100);
+    const percentage = Math.round((correctFirstTry / 20) * 100);
 
     container.innerHTML = `
         <div class="complete">
             <h2>Test Complete, Amelia! 🎉</h2>
             <div class="results">
-                <p><strong>Total Questions:</strong> ${questions.length}</p>
+                <p><strong>Questions This Test:</strong> 20</p>
                 <p><strong>Correct on First Attempt:</strong> ${correctFirstTry}</p>
                 <p><strong>First-Attempt Score:</strong> ${percentage}%</p>
             </div>
@@ -185,6 +214,7 @@ function showResults() {
 }
 
 function resetTest() {
+    questions = getRandomQuestions(questionBank, 20);
     current = 0;
     firstAttempts = [];
     correctFirstTry = 0;
